@@ -12,27 +12,31 @@
 
 */
 
-/* Execute the function to run and display the countdown clock */
-showClock();
-setInterval("showClock()", 15);
-
-/* Global Variables */
-var minsLeft = 0;
-var secsLeft = 15;
+/* Set my Global Variables */
+var minsLeft = 30;
+var secsLeft = 0;
 var timeLeft = minsLeft * 60 + secsLeft;
+
+/* Execute the function to run and display the countdown clock */
+var clockId = setInterval("countdown()", 1000);
 
 /* Countdown Function to update seconds minutes & time left variables */
 function countdown(){
-  var minsLeft = timeLeft % 60;
-  var secsLeft = timeLeft - 60 * minsLeft;
-
- 
-
+      minsLeft = Math.floor(timeLeft / 60);
+      secsLeft = timeLeft - 60 * minsLeft;
+      var minsString = addLeadingZero(minsLeft);
+      var secsString = addLeadingZero(secsLeft);
+      document.getElementById("minutes").textContent = minsString;
+      document.getElementById("seconds").textContent = secsString;
+      timeLeft -= 1;
+      checkTimer();
 }
 
-
-
-
+/* Stop clock function stops countdown */
+function stopClock(){
+   document.getElementById("TimeHead").insertAdjacentHTML("beforeend","   <br />(OrderExpired)");
+   clearInterval(clockId);
+}
 
 /* ------------------------------------------------- */
 
